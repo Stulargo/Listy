@@ -8,7 +8,7 @@ struct Osoba {
 };
 
 int main() {
-    Osoba *head = nullptr;
+    Osoba *head = NULL;
     Osoba *nowy = new Osoba;
 
     cout << "Podaj nazwisko: ";
@@ -16,9 +16,14 @@ int main() {
     cout << "Podaj wiek: ";
     cin >> nowy->wiek;
 
-    cout << "Czy chcesz wprowadzic jeszcze jeden element do listy" <<endl;
     nowy->next = head;
     head = nowy;
+
+    Osoba *temp = head;
+    while (temp != NULL) {
+        cout << "Nazwisko: " << temp->nazwisko << ", Wiek: " << temp->wiek << endl;
+        temp = temp->next;
+    }
 
     return 0;
 }
