@@ -19,23 +19,26 @@ Przedmiot* usun(Przedmiot* head, string doUsuniecia)
             if(temp == head)
             {
                 head=head->next;
-                temp->next;
                 delete temp;
+                temp = head;
+                poprzedni = head;
             }
             else
             {
                 poprzedni->next = temp->next;
-                temp->next;
                 delete temp;
+                temp = poprzedni->next;
+
             }
 
         }
         else
         {
+            poprzedni = temp;
             temp = temp->next;
-            poprzedni = poprzedni->next;
         }
     }
+    return head;
 }
 
 int main() {
@@ -80,6 +83,7 @@ int main() {
     head = usun(head,nazwaPrzedmiotu);
 
     cout << "Lista przedmiotow po usunieciu: " << endl;
+    temp = head;
     while (temp != NULL) {
         cout << "Nazwa: " << temp->nazwa << ", Cena: " << temp->cena << endl;
         temp = temp->next;
