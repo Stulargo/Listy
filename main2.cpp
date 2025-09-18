@@ -8,29 +8,41 @@ struct Przedmiot {
     Przedmiot* next;
 };
 
-Przedmiot *usun(Przedmiot glowa, string doUsuniecia){
-
-        Przedmiot* temp = head;
-        Przedmiot* poprzedni =head;
-        while(temp!=NULL){
-            if(temp -> nazwa == doUsuniecia){
-                if(temp == glowa){
-                    glowa = glowa ->next;
-                    delete temp;
-                }
-                else{
-                    poprzedni ->next = temp->next;
-                }
+Przedmiot* usun(Przedmiot* head, string doUsuniecia)
+{
+    Przedmiot* temp = head;
+    Przedmiot* poprzedni = head;
+    while(temp != NULL)
+    {
+        if(temp->nazwa == doUsuniecia)
+        {
+            if(temp == head)
+            {
+                head=head->next;
+                temp->next;
+                delete temp;
             }
+            else
+            {
+                poprzedni->next = temp->next;
+                temp->next;
+                delete temp;
+            }
+
         }
-
+        else
+        {
+            temp = temp->next;
+            poprzedni = poprzedni->next;
+        }
     }
-
+}
 
 int main() {
     Przedmiot* head = NULL;
     Przedmiot* tail = NULL;
     char tn;
+    string nazwaPrzedmiotu;
 
     do {
         Przedmiot* nowy = new Przedmiot();
@@ -58,6 +70,16 @@ int main() {
 
     cout << "Lista przedmiotow: "<< endl;
     Przedmiot* temp = head;
+    while (temp != NULL) {
+        cout << "Nazwa: " << temp->nazwa << ", Cena: " << temp->cena << endl;
+        temp = temp->next;
+    }
+
+    cout << "Przedmiot o jakiej nazwie chcesz usunac? ";
+    cin>>nazwaPrzedmiotu;
+    head = usun(head,nazwaPrzedmiotu);
+
+    cout << "Lista przedmiotow po usunieciu: " << endl;
     while (temp != NULL) {
         cout << "Nazwa: " << temp->nazwa << ", Cena: " << temp->cena << endl;
         temp = temp->next;
